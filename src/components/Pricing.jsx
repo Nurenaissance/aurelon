@@ -13,7 +13,7 @@ const Pricing = () => {
     {
       name: t.pricing.plans[0].name,
       badge: t.pricing.plans[0].badge,
-      price: '74,990',
+      price: '24,999',
       currency: '₹',
       description: t.pricing.plans[0].description,
       features: t.pricing.plans[0].features,
@@ -24,7 +24,7 @@ const Pricing = () => {
     {
       name: t.pricing.plans[1].name,
       badge: t.pricing.plans[1].badge,
-      price: '1,09,990',
+      price: '34,999',
       currency: '₹',
       description: t.pricing.plans[1].description,
       features: t.pricing.plans[1].features,

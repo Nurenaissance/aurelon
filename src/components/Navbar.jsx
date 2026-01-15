@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Globe } from 'lucide-react';
+import { Menu, X, ArrowRight, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { language, toggleLanguage, translations: t } = useLanguage();
+  const { translations: t } = useLanguage();
+  const { cartCount, setIsCartOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,13 +42,19 @@ const Navbar = () => {
             {/* Logo */}
             <motion.a
               href="#"
-              className="flex items-center group"
+              className="flex items-center gap-2 group"
               whileHover={{ scale: 1.02 }}
             >
-              <span className="font-display text-2xl tracking-tight text-foreground">
+              <img
+                src={isScrolled ? "/images/aurelon-logo.svg" : "/images/aurelon-logo-light.svg"}
+                alt="Aurelon"
+                className="w-8 h-8"
+              />
+              <span className={`font-display text-2xl tracking-tight transition-colors duration-300 ${
+                isScrolled ? 'text-foreground' : 'text-white'
+              }`}>
                 Aurelon
               </span>
-              <span className="ml-1 w-1.5 h-1.5 rounded-full bg-aurele-gold" />
             </motion.a>
 
             {/* Desktop Navigation */}
@@ -55,7 +63,11 @@ const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="text-secondary hover:text-foreground transition-colors duration-300 text-sm font-medium relative group"
+                  className={`transition-colors duration-300 text-sm font-medium relative group ${
+                    isScrolled
+                      ? 'text-secondary hover:text-foreground'
+                      : 'text-white/80 hover:text-white'
+                  }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -66,25 +78,39 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* CTA Buttons + Language Toggle */}
+            {/* CTA Buttons + Cart */}
             <div className="hidden md:flex items-center space-x-4">
-              {/* Language Toggle */}
-              <motion.button
-                onClick={toggleLanguage}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-secondary hover:text-foreground transition-colors duration-300 rounded-full hover:bg-aurele-warm"
-                whileHover={{ scale: 1.02 }}
-              >
-                <Globe className="w-4 h-4" />
-                <span className="font-medium">{language === 'en' ? 'हिंदी' : 'EN'}</span>
-              </motion.button>
-
               <motion.a
                 href="#pricing"
-                className="text-sm text-secondary hover:text-foreground transition-colors duration-300"
+                className={`text-sm transition-colors duration-300 ${
+                  isScrolled
+                    ? 'text-secondary hover:text-foreground'
+                    : 'text-white/80 hover:text-white'
+                }`}
                 whileHover={{ scale: 1.02 }}
               >
                 {t.nav.shop}
               </motion.a>
+
+              {/* Cart Icon */}
+              <motion.button
+                onClick={() => setIsCartOpen(true)}
+                className={`relative p-2 transition-colors duration-300 rounded-full ${
+                  isScrolled
+                    ? 'text-secondary hover:text-foreground hover:bg-aurele-warm'
+                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-aurele-gold text-aurele-noir text-xs font-bold rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </motion.button>
+
               <motion.a
                 href="#cta"
                 className="group flex items-center gap-2 px-6 py-2.5 bg-aurele-gold text-aurele-noir font-medium rounded-full text-sm
@@ -99,15 +125,24 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center gap-3">
-              {/* Mobile Language Toggle */}
+              {/* Mobile Cart Icon */}
               <button
-                onClick={toggleLanguage}
-                className="p-2 text-secondary hover:text-foreground"
+                onClick={() => setIsCartOpen(true)}
+                className={`relative p-2 transition-colors duration-300 ${
+                  isScrolled ? 'text-secondary hover:text-foreground' : 'text-white/80 hover:text-white'
+                }`}
               >
-                <Globe className="w-5 h-5" />
+                <ShoppingBag className="w-5 h-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-aurele-gold text-aurele-noir text-xs font-bold rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
               </button>
               <button
-                className="p-2 text-foreground"
+                className={`p-2 transition-colors duration-300 ${
+                  isScrolled ? 'text-foreground' : 'text-white'
+                }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

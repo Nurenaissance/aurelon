@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useCart } from '../context/CartContext';
 import {
   ChevronLeft,
   ChevronRight,
@@ -20,10 +21,12 @@ import {
 
 const Hero = () => {
   const { translations: t } = useLanguage();
+  const { addToCart } = useCart();
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const colors = [
     { name: 'Obsidian Black', hex: '#1A1814', image: 0 },
@@ -32,10 +35,10 @@ const Hero = () => {
   ];
 
   const productImages = [
-    { id: 0, alt: 'Aurelon One - Front View' },
-    { id: 1, alt: 'Aurelon One - Side View' },
-    { id: 2, alt: 'Aurelon One - Details' },
-    { id: 3, alt: 'Aurelon One - Lifestyle' },
+    { id: 0, alt: 'Aurelon One - Front View', src: '/images/products/product-front.webp' },
+    { id: 1, alt: 'Aurelon One - Side View', src: '/images/products/product-side.webp' },
+    { id: 2, alt: 'Aurelon One - Details', src: '/images/products/product-details.webp' },
+    { id: 3, alt: 'Aurelon One - Angle View', src: '/images/products/product-angle.webp' },
   ];
 
   const scrollToProduct = () => {
@@ -83,8 +86,8 @@ const Hero = () => {
 
             {/* Subheadline */}
             <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Premium AI-powered smart glasses. Real-time translation in 24 languages,
-              personal AI assistant, and all-day comfort in one elegant frame.
+              8MP HD camera smart glasses with AI translation, ChatGPT voice assistant,
+              1080P video recording, and 10-hour battery life.
             </p>
 
             {/* CTA Buttons */}
@@ -96,7 +99,7 @@ const Hero = () => {
                 className="group px-8 py-4 bg-aurele-gold text-aurele-noir font-semibold rounded-full hover:bg-aurele-gold-dark hover:shadow-glow transition-all duration-300 flex items-center gap-2"
               >
                 <ShoppingBag className="w-5 h-5" />
-                <span>Shop Now — ₹74,990</span>
+                <span>Shop Now — ₹24,999</span>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -124,7 +127,7 @@ const Hero = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4" />
-                <span>2-Year Warranty</span>
+                <span>1-Year Warranty</span>
               </div>
             </div>
           </motion.div>
@@ -136,33 +139,13 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-12 relative"
           >
-            <div className="relative max-w-lg mx-auto">
-              {/* Glasses SVG Hero Illustration */}
-              <svg viewBox="0 0 400 160" className="w-full drop-shadow-2xl">
-                <defs>
-                  <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(201, 169, 97, 0.15)" />
-                    <stop offset="100%" stopColor="rgba(201, 169, 97, 0.05)" />
-                  </linearGradient>
-                </defs>
-                {/* Left Lens */}
-                <rect x="30" y="40" width="140" height="80" rx="20" fill="url(#lensGradient)" stroke="#C9A961" strokeWidth="3"/>
-                {/* Right Lens */}
-                <rect x="230" y="40" width="140" height="80" rx="20" fill="url(#lensGradient)" stroke="#C9A961" strokeWidth="3"/>
-                {/* Bridge */}
-                <path d="M170 80 Q200 60 230 80" fill="none" stroke="#C9A961" strokeWidth="3"/>
-                {/* Left Temple */}
-                <line x1="30" y1="80" x2="5" y2="75" stroke="#C9A961" strokeWidth="3" strokeLinecap="round"/>
-                {/* Right Temple */}
-                <line x1="370" y1="80" x2="395" y2="75" stroke="#C9A961" strokeWidth="3" strokeLinecap="round"/>
-                {/* AI Indicators */}
-                <circle cx="100" cy="80" r="6" fill="#C9A961" opacity="0.8">
-                  <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="300" cy="80" r="6" fill="#C9A961" opacity="0.8">
-                  <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
-                </circle>
-              </svg>
+            <div className="relative max-w-2xl mx-auto">
+              {/* Real Product Image */}
+              <img
+                src="/images/products/product-front.webp"
+                alt="Aurelon One AI Smart Glasses"
+                className="w-full drop-shadow-2xl rounded-lg"
+              />
 
               {/* Floating Feature Tags */}
               <motion.div
@@ -171,7 +154,7 @@ const Hero = () => {
                 transition={{ duration: 0.6, delay: 1 }}
                 className="absolute -left-4 top-1/4 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs"
               >
-                24 Languages
+                8MP Camera
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -179,7 +162,7 @@ const Hero = () => {
                 transition={{ duration: 0.6, delay: 1.1 }}
                 className="absolute -right-4 top-1/4 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs"
               >
-                12h Battery
+                10h Battery
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -187,7 +170,7 @@ const Hero = () => {
                 transition={{ duration: 0.6, delay: 1.2 }}
                 className="absolute left-1/2 -translate-x-1/2 -bottom-2 px-3 py-1.5 rounded-full bg-aurele-gold/20 backdrop-blur-sm border border-aurele-gold/30 text-aurele-gold text-xs font-medium"
               >
-                On-Device AI
+                ChatGPT AI
               </motion.div>
             </div>
           </motion.div>
@@ -226,20 +209,13 @@ const Hero = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full h-full flex items-center justify-center p-8 md:p-16"
+                    className="w-full h-full flex items-center justify-center p-4 md:p-8"
                   >
-                    {/* Product SVG Illustration */}
-                    <svg viewBox="0 0 300 120" className="w-full max-w-md">
-                      <rect x="20" y="30" width="110" height="60" rx="16" fill="none" stroke={colors[selectedColor].hex} strokeWidth="3"/>
-                      <rect x="170" y="30" width="110" height="60" rx="16" fill="none" stroke={colors[selectedColor].hex} strokeWidth="3"/>
-                      <path d="M130 60 Q150 45 170 60" fill="none" stroke={colors[selectedColor].hex} strokeWidth="3"/>
-                      <line x1="20" y1="60" x2="5" y2="60" stroke={colors[selectedColor].hex} strokeWidth="3" strokeLinecap="round"/>
-                      <line x1="280" y1="60" x2="295" y2="60" stroke={colors[selectedColor].hex} strokeWidth="3" strokeLinecap="round"/>
-                      <circle cx="75" cy="60" r="4" fill="#C9A961"/>
-                      <circle cx="225" cy="60" r="4" fill="#C9A961"/>
-                      <rect x="22" y="32" width="106" height="56" rx="14" fill={colors[selectedColor].hex} opacity="0.05"/>
-                      <rect x="172" y="32" width="106" height="56" rx="14" fill={colors[selectedColor].hex} opacity="0.05"/>
-                    </svg>
+                    <img
+                      src={productImages[selectedImage].src}
+                      alt={productImages[selectedImage].alt}
+                      className="w-full h-full object-contain"
+                    />
                   </motion.div>
                 </AnimatePresence>
 
@@ -292,12 +268,12 @@ const Hero = () => {
                       selectedImage === index ? 'border-aurele-gold' : 'border-faint/30 hover:border-faint'
                     }`}
                   >
-                    <div className="w-full h-full flex items-center justify-center p-3">
-                      <svg viewBox="0 0 60 30" className="w-full">
-                        <rect x="5" y="8" width="20" height="14" rx="3" fill="none" stroke={colors[selectedColor].hex} strokeWidth="1"/>
-                        <rect x="35" y="8" width="20" height="14" rx="3" fill="none" stroke={colors[selectedColor].hex} strokeWidth="1"/>
-                        <path d="M25 15 Q30 12 35 15" fill="none" stroke={colors[selectedColor].hex} strokeWidth="1"/>
-                      </svg>
+                    <div className="w-full h-full flex items-center justify-center p-2">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                   </button>
                 ))}
@@ -325,7 +301,7 @@ const Hero = () => {
               <h1 className="font-display text-3xl md:text-4xl text-foreground mb-2">
                 Aurelon One
               </h1>
-              <p className="text-secondary text-lg mb-4">AI-Powered Smart Glasses</p>
+              <p className="text-secondary text-lg mb-4">8MP AI Camera Smart Glasses</p>
 
               {/* Rating */}
               <div className="flex items-center gap-3 mb-6">
@@ -342,20 +318,20 @@ const Hero = () => {
               {/* Price */}
               <div className="mb-6 p-4 rounded-xl bg-aurele-warm/50 border border-aurele-gold/20">
                 <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-3xl font-semibold text-foreground">₹74,990</span>
-                  <span className="text-lg text-muted line-through">₹89,990</span>
+                  <span className="text-3xl font-semibold text-foreground">₹24,999</span>
+                  <span className="text-lg text-muted line-through">₹34,999</span>
                   <span className="px-2 py-1 rounded bg-success/10 text-success text-sm font-medium">
                     17% OFF
                   </span>
                 </div>
                 <p className="text-sm text-secondary">
-                  or <span className="font-medium">₹24,997/mo</span> with No-Cost EMI
+                  or <span className="font-medium">₹8,333/mo</span> with No-Cost EMI
                 </p>
               </div>
 
               {/* Quick Features */}
               <div className="flex flex-wrap gap-3 mb-6">
-                {['24+ Languages', 'AI Translation', '12h Battery', 'On-Device AI'].map((feature, index) => (
+                {['8MP HD Camera', '1080P Video', 'AI Translation', '10h Battery'].map((feature, index) => (
                   <div key={index} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-faint/30 text-sm">
                     <Zap className="w-3.5 h-3.5 text-aurele-gold" />
                     <span className="text-secondary">{feature}</span>
@@ -417,10 +393,34 @@ const Hero = () => {
                 <motion.button
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
-                  className="w-full btn-primary justify-center py-4 text-lg"
+                  onClick={() => {
+                    addToCart({
+                      id: 'aurelon-one',
+                      name: 'Aurelon One',
+                      price: 24999,
+                      color: colors[selectedColor].name,
+                      image: productImages[0].src,
+                    }, quantity);
+                    setAddedToCart(true);
+                    setTimeout(() => setAddedToCart(false), 2000);
+                  }}
+                  className={`w-full justify-center py-4 text-lg flex items-center gap-2 rounded-full font-semibold transition-all duration-300 ${
+                    addedToCart
+                      ? 'bg-emerald-500 text-white'
+                      : 'bg-aurele-gold text-aurele-noir hover:bg-aurele-gold-dark'
+                  }`}
                 >
-                  <ShoppingBag className="w-5 h-5" />
-                  <span>Add to Cart — ₹{(74990 * quantity).toLocaleString()}</span>
+                  {addedToCart ? (
+                    <>
+                      <Check className="w-5 h-5" />
+                      <span>Added to Cart!</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-5 h-5" />
+                      <span>Add to Cart — ₹{(24999 * quantity).toLocaleString()}</span>
+                    </>
+                  )}
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.01 }}
@@ -443,7 +443,7 @@ const Hero = () => {
                 </div>
                 <div className="text-center p-3 rounded-xl bg-white border border-faint/30">
                   <Shield className="w-5 h-5 mx-auto mb-1.5 text-aurele-gold" />
-                  <span className="text-xs text-secondary block font-medium">2-Year Warranty</span>
+                  <span className="text-xs text-secondary block font-medium">1-Year Warranty</span>
                 </div>
               </div>
 
@@ -455,7 +455,7 @@ const Hero = () => {
                     <p className="text-sm font-medium text-foreground">
                       Arrives by <span className="text-aurele-gold">Jan 22-25</span>
                     </p>
-                    <p className="text-xs text-muted mt-1">Free express shipping on orders over ₹50,000</p>
+                    <p className="text-xs text-muted mt-1">Free express shipping on orders over ₹20,000</p>
                   </div>
                 </div>
               </div>

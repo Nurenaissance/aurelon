@@ -7,7 +7,17 @@
       "Bash(npx tailwindcss:*)",
       "Bash(npm run dev:*)",
       "Skill(design-engineer)",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "WebFetch(domain:dreamittech.en.made-in-china.com)",
+      "WebFetch(domain:staranb.en.made-in-china.com)",
+      "WebFetch(domain:www.alibaba.com)",
+      "WebFetch(domain:doolike.en.made-in-china.com)",
+      "WebFetch(domain:gzronc.en.made-in-china.com)",
+      "WebFetch(domain:www.senbono.store)",
+      "Bash(curl:*)",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:www.pexels.com)"
     ]
   }
 }

@@ -31,7 +31,7 @@ export const translations = {
         hours: 'Hours',
         grams: 'Grams',
       },
-      productName: 'AURELON One',
+      productName: 'Aurelon One',
       productTag: 'Integrated AI',
       tags: ['AI Translation', 'Voice Assistant', 'Spatial Audio', 'All-day Battery'],
       floatingAI: 'AI',
@@ -85,7 +85,7 @@ export const translations = {
       label: 'Our Philosophy',
       headline: 'The art of seeing',
       headlineAccent: 'differently',
-      subheading: 'At AURELON, we believe elegance and intelligence are not contradictory. We fuse them to create exceptional objects that transcend technology.',
+      subheading: 'At Aurelon, we believe elegance and intelligence are not contradictory. We fuse them to create exceptional objects that transcend technology.',
       points: [
         {
           title: 'Vision',
@@ -101,14 +101,14 @@ export const translations = {
         },
       ],
       quote: 'True technological elegance is the kind you don\'t notice. It accompanies you, elevates you, and remains invisible.',
-      quoteAuthor: 'Founder, AURELE',
+      quoteAuthor: 'Founder, Aurelon',
     },
     // Use Cases
     useCases: {
       label: 'The Experience',
       headline: 'Designed for',
       headlineAccent: 'your life',
-      subheading: 'AURELON adapts to your lifestyle, not the other way around. Discover how our glasses enrich every moment.',
+      subheading: 'Aurelon adapts to your lifestyle, not the other way around. Discover how our glasses enrich every moment.',
       experiences: [
         {
           id: 'business',
@@ -133,7 +133,7 @@ export const translations = {
             'Discreet audio navigation',
             'Contextual cultural information',
           ],
-          testimonial: '"I explored Tokyo without speaking Japanese. AURELON translated every conversation."',
+          testimonial: '"I explored Tokyo without speaking Japanese. Aurelon translated every conversation."',
           author: 'Priya M., Photographer',
         },
         {
@@ -158,16 +158,16 @@ export const translations = {
       label: 'How it works',
       headline: 'Simple as',
       headlineAccent: 'hello',
-      subheading: 'No complex setup. No learning curve. AURELE adapts to you, not the other way around.',
+      subheading: 'No complex setup. No learning curve. Aurelon adapts to you, not the other way around.',
       steps: [
         {
           title: 'Wear',
-          description: 'Put on your AURELE like any elegant pair of glasses. Exceptional comfort allows all-day wear.',
+          description: 'Put on your Aurelon like any elegant pair of glasses. Exceptional comfort allows all-day wear.',
           detail: 'Automatic Bluetooth connection',
         },
         {
           title: 'Connect',
-          description: 'The AURELE app syncs instantly. Customize your preferences and discover all possibilities.',
+          description: 'The Aurelon app syncs instantly. Customize your preferences and discover all possibilities.',
           detail: 'Setup in under 2 minutes',
         },
         {
@@ -176,14 +176,14 @@ export const translations = {
           detail: 'Response in under 500ms',
         },
       ],
-      videoTitle: 'See AURELE in action',
+      videoTitle: 'See Aurelon in action',
       videoLength: '2:30 min — Product presentation',
     },
-    // Why AURELE
+    // Why Aurelon
     whyAurele: {
       label: 'The Studio',
       headline: 'Why choose',
-      headlineAccent: 'AURELON',
+      headlineAccent: 'Aurelon',
       subheading: 'Craftsmanship at the service of innovation. Every detail counts, every choice is deliberate.',
       differentiators: [
         {
@@ -228,7 +228,7 @@ export const translations = {
       subheading: 'Two collections designed for different lifestyles. One same standard of excellence.',
       plans: [
         {
-          name: 'AURELON One',
+          name: 'Aurelon One',
           badge: 'Signature Collection',
           description: 'The essence of intelligent elegance',
           features: [
@@ -243,11 +243,11 @@ export const translations = {
           cta: 'Order Now',
         },
         {
-          name: 'AURELON Pro',
+          name: 'Aurelon Pro',
           badge: 'Coming Soon',
           description: 'For the highest standards',
           features: [
-            'Everything in AURELON One',
+            'Everything in Aurelon One',
             'Premium high-fidelity audio',
             'Extended battery (16+ hours)',
             'Priority AI processing',
@@ -261,7 +261,7 @@ export const translations = {
       enterprise: {
         badge: 'Enterprise',
         headline: 'Custom Solutions',
-        description: 'Equip your teams with AURELON. Customized solutions, preferential rates, and dedicated support for organizations.',
+        description: 'Equip your teams with Aurelon. Customized solutions, preferential rates, and dedicated support for organizations.',
         cta: 'Request a Demo',
         features: ['Preferential rates', 'Training included', 'Dedicated support', 'Flexible billing'],
       },
@@ -271,8 +271,8 @@ export const translations = {
     trust: {
       label: 'Testimonials',
       headline: 'They chose',
-      headlineAccent: 'AURELON',
-      subheading: 'Discover why our customers can\'t live without their AURELON.',
+      headlineAccent: 'Aurelon',
+      subheading: 'Discover why our customers can\'t live without their Aurelon.',
       stats: {
         customers: 'Happy customers',
         rating: 'Average rating',
@@ -281,7 +281,7 @@ export const translations = {
       },
       testimonials: [
         {
-          quote: 'AURELON transformed how I travel. The instant translation is stunningly natural.',
+          quote: 'Aurelon transformed how I travel. The instant translation is stunningly natural.',
           author: 'Meera K.',
           role: 'International Consultant',
         },
@@ -300,7 +300,7 @@ export const translations = {
         label: 'In the press',
         mentions: [
           { name: 'Economic Times', quote: 'India\'s answer to premium smart eyewear' },
-          { name: 'Tech Today', quote: 'AURELE reinvents intelligent glasses' },
+          { name: 'Tech Today', quote: 'Aurelon reinvents intelligent glasses' },
           { name: 'Vogue India', quote: 'The most elegant high-tech accessory' },
         ],
       },
@@ -331,7 +331,7 @@ export const translations = {
         support: 'Support',
       },
       links: {
-        collection: ['AURELE One', 'AURELE Pro', 'Accessories', 'Customization'],
+        collection: ['Aurelon One', 'Aurelon Pro', 'Accessories', 'Customization'],
         brand: ['Our Story', 'The Studio', 'Commitments', 'Press'],
         support: ['Help Center', 'Warranty', 'Repairs', 'Contact'],
       },
@@ -367,7 +367,7 @@ export const translations = {
         hours: 'घंटे',
         grams: 'ग्राम',
       },
-      productName: 'AURELON One',
+      productName: 'Aurelon One',
       productTag: 'इंटीग्रेटेड AI',
       tags: ['AI अनुवाद', 'वॉयस असिस्टेंट', 'स्पेशल ऑडियो', 'ऑल-डे बैटरी'],
       floatingAI: 'AI',
@@ -422,7 +422,7 @@ export const translations = {
       subheading: 'दो कलेक्शन अलग-अलग लाइफस्टाइल के लिए। एक ही उत्कृष्टता का मानक।',
       plans: [
         {
-          name: 'AURELON One',
+          name: 'Aurelon One',
           badge: 'सिग्नेचर कलेक्शन',
           description: 'इंटेलिजेंट एलिगेंस का सार',
           features: [
@@ -437,11 +437,11 @@ export const translations = {
           cta: 'अभी ऑर्डर करें',
         },
         {
-          name: 'AURELON Pro',
+          name: 'Aurelon Pro',
           badge: 'जल्द आ रहा है',
           description: 'उच्चतम मानकों के लिए',
           features: [
-            'AURELON One की सभी सुविधाएं',
+            'Aurelon One की सभी सुविधाएं',
             'प्रीमियम हाई-फिडेलिटी ऑडियो',
             'एक्सटेंडेड बैटरी (16+ घंटे)',
             'प्रायोरिटी AI प्रोसेसिंग',
@@ -455,7 +455,7 @@ export const translations = {
       enterprise: {
         badge: 'एंटरप्राइज़',
         headline: 'कस्टम सॉल्यूशंस',
-        description: 'अपनी टीमों को AURELON से लैस करें। कस्टमाइज़्ड सॉल्यूशंस और डेडिकेटेड सपोर्ट।',
+        description: 'अपनी टीमों को Aurelon से लैस करें। कस्टमाइज़्ड सॉल्यूशंस और डेडिकेटेड सपोर्ट।',
         cta: 'डेमो का अनुरोध करें',
         features: ['प्रेफरेंशियल रेट्स', 'ट्रेनिंग शामिल', 'डेडिकेटेड सपोर्ट', 'फ्लेक्सिबल बिलिंग'],
       },
@@ -485,7 +485,7 @@ export const translations = {
         support: 'सपोर्ट',
       },
       links: {
-        collection: ['AURELE One', 'AURELE Pro', 'एक्सेसरीज़', 'कस्टमाइज़ेशन'],
+        collection: ['Aurelon One', 'Aurelon Pro', 'एक्सेसरीज़', 'कस्टमाइज़ेशन'],
         brand: ['हमारी कहानी', 'स्टूडियो', 'प्रतिबद्धताएं', 'प्रेस'],
         support: ['हेल्प सेंटर', 'वारंटी', 'रिपेयर्स', 'संपर्क'],
       },

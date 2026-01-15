@@ -44,7 +44,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
             >
               <span className="font-display text-2xl tracking-tight text-foreground">
-                AURELON
+                Aurelon
               </span>
               <span className="ml-1 w-1.5 h-1.5 rounded-full bg-aurele-gold" />
             </motion.a>

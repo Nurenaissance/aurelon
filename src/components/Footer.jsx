@@ -44,7 +44,7 @@ const Footer = () => {
               {/* Logo */}
               <a href="#" className="flex items-center mb-6">
                 <span className="font-display text-2xl tracking-tight text-white">
-                  AURELON
+                  Aurelon
                 </span>
                 <span className="ml-1 w-1.5 h-1.5 rounded-full bg-aurele-gold" />
               </a>
@@ -142,7 +142,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-4 text-sm text-white/40">
-            <span>© 2025 AURELON</span>
+            <span>© 2025 Aurelon</span>
             <span className="hidden md:inline">·</span>
             <a href="#" className="hover:text-aurele-gold transition-colors">{t.footer.legal}</a>
             <span className="hidden md:inline">·</span>

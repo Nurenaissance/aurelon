@@ -1,4 +1,4 @@
-# Design System - AURELON
+# Design System - Aurelon
 
 > Premium AI Eyewear | Intelligence You Wear
 

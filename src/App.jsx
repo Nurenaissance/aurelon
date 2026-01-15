@@ -35,7 +35,7 @@ function App() {
         {/* Experience / Use Cases */}
         <UseCases />
 
-        {/* L'Atelier / Why AURELE */}
+        {/* Why Aurelon */}
         <WhyLumiq />
 
         {/* How It Works */}

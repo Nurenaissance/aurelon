@@ -6,7 +6,8 @@
       "Bash(npm install:*)",
       "Bash(npx tailwindcss:*)",
       "Bash(npm run dev:*)",
-      "Skill(design-engineer)"
+      "Skill(design-engineer)",
+      "Bash(npm run build)"
     ]
   }
 }

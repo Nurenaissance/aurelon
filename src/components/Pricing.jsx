@@ -12,23 +12,25 @@ const Pricing = () => {
   const collections = [
     {
       name: t.pricing.plans[0].name,
-      badge: t.pricing.plans[0].badge,
-      price: '24,999',
+      badge: 'Coming Soon',
+      price: '4,000',
+      pricePrefix: 'Starting from',
       currency: '₹',
       description: t.pricing.plans[0].description,
       features: t.pricing.plans[0].features,
-      cta: t.pricing.plans[0].cta,
+      cta: 'Notify Me',
       ctaLink: '#cta',
       highlighted: true,
     },
     {
       name: t.pricing.plans[1].name,
-      badge: t.pricing.plans[1].badge,
-      price: '34,999',
+      badge: 'Coming Soon',
+      price: '8,000',
+      pricePrefix: 'Starting from',
       currency: '₹',
       description: t.pricing.plans[1].description,
       features: t.pricing.plans[1].features,
-      cta: t.pricing.plans[1].cta,
+      cta: 'Notify Me',
       ctaLink: '#cta',
       highlighted: false,
     },
@@ -101,6 +103,9 @@ const Pricing = () => {
 
                   {/* Price */}
                   <div className="mb-8">
+                    {plan.pricePrefix && (
+                      <span className="text-sm text-muted block mb-1">{plan.pricePrefix}</span>
+                    )}
                     <div className="flex items-baseline gap-1">
                       <span className="text-2xl text-muted">{plan.currency}</span>
                       <span className="font-display text-5xl text-foreground">{plan.price}</span>

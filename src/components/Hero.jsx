@@ -99,7 +99,7 @@ const Hero = () => {
                 className="group px-8 py-4 bg-aurele-gold text-aurele-noir font-semibold rounded-full hover:bg-aurele-gold-dark hover:shadow-glow transition-all duration-300 flex items-center gap-2"
               >
                 <ShoppingBag className="w-5 h-5" />
-                <span>Shop Now — ₹24,999</span>
+                <span>Coming Soon — Starting from ₹4,000</span>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -318,14 +318,13 @@ const Hero = () => {
               {/* Price */}
               <div className="mb-6 p-4 rounded-xl bg-aurele-warm/50 border border-aurele-gold/20">
                 <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-3xl font-semibold text-foreground">₹24,999</span>
-                  <span className="text-lg text-muted line-through">₹34,999</span>
-                  <span className="px-2 py-1 rounded bg-success/10 text-success text-sm font-medium">
-                    17% OFF
+                  <span className="text-3xl font-semibold text-foreground">Starting from ₹4,000</span>
+                  <span className="px-2 py-1 rounded bg-amber-500/10 text-amber-600 text-sm font-medium">
+                    Coming Soon
                   </span>
                 </div>
                 <p className="text-sm text-secondary">
-                  or <span className="font-medium">₹8,333/mo</span> with No-Cost EMI
+                  EMI options available at launch
                 </p>
               </div>
 
@@ -397,7 +396,7 @@ const Hero = () => {
                     addToCart({
                       id: 'aurelon-one',
                       name: 'Aurelon One',
-                      price: 24999,
+                      price: 4000,
                       color: colors[selectedColor].name,
                       image: productImages[0].src,
                     }, quantity);
@@ -418,7 +417,7 @@ const Hero = () => {
                   ) : (
                     <>
                       <ShoppingBag className="w-5 h-5" />
-                      <span>Add to Cart — ₹{(24999 * quantity).toLocaleString()}</span>
+                      <span>Add to Cart — ₹{(4000 * quantity).toLocaleString()}</span>
                     </>
                   )}
                 </motion.button>

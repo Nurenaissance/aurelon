@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, Phone, Music } from 'lucide-react';
+import { Headphones, Users, Camera } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const SolutionBlock = ({ data, icon: Icon, reverse, isDark }) => {
@@ -90,9 +90,9 @@ const Solutions = () => {
   const { translations: t } = useLanguage();
 
   const blocks = [
-    { data: t.solutions.safer, icon: Shield, reverse: false, isDark: false },
-    { data: t.solutions.connected, icon: Phone, reverse: true, isDark: true },
-    { data: t.solutions.play, icon: Music, reverse: false, isDark: false },
+    { data: t.solutions.soundtrack, icon: Headphones, reverse: false, isDark: false },
+    { data: t.solutions.concert, icon: Users, reverse: true, isDark: true },
+    { data: t.solutions.witness, icon: Camera, reverse: false, isDark: false },
   ];
 
   return (

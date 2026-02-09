@@ -185,6 +185,43 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Image placeholder for Solutions section */
+.image-placeholder {
+  background: radial-gradient(ellipse at center, rgba(201,169,97,0.08) 0%, rgba(245,242,237,1) 70%);
+  border: 1px solid rgba(212,207,198,0.3);
+}
+
+.image-placeholder-dark {
+  background: radial-gradient(ellipse at center, rgba(201,169,97,0.12) 0%, rgba(45,41,38,1) 70%);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Slow float for hero product */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Slow gold glow pulse */
+@keyframes glow-slow {
+  0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.18; transform: translate(-50%, -50%) scale(1.05); }
 }
 
 /* Custom scrollbar */
@@ -228,6 +265,15 @@ img[data-loading="true"] {
   width: 60px;
   height: 2px;
   background: linear-gradient(90deg, #C9A961, transparent);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Subtle grain texture overlay */

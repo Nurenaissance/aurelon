@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { translations: t } = useLanguage();
+  const { translations: t, toggleLanguage, language } = useLanguage();
   const { cartCount, setIsCartOpen } = useCart();
 
   useEffect(() => {
@@ -19,10 +19,8 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: t.nav.collection, href: '#features' },
-    { name: t.nav.craftsmanship, href: '#craftsmanship' },
-    { name: t.nav.experience, href: '#experience' },
-    { name: t.nav.studio, href: '#atelier' },
+    { name: t.nav.solutions, href: '#solutions' },
+    { name: t.nav.shop, href: '#product-buy' },
   ];
 
   return (
@@ -78,19 +76,19 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* CTA Buttons + Cart */}
+            {/* CTA Buttons + Cart + Language */}
             <div className="hidden md:flex items-center space-x-4">
-              <motion.a
-                href="#pricing"
-                className={`text-sm transition-colors duration-300 ${
+              {/* Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className={`text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-300 ${
                   isScrolled
-                    ? 'text-secondary hover:text-foreground'
-                    : 'text-white/80 hover:text-white'
+                    ? 'text-secondary hover:text-foreground hover:bg-aurele-warm'
+                    : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
-                whileHover={{ scale: 1.02 }}
               >
-                {t.nav.shop}
-              </motion.a>
+                {language === 'en' ? 'हिं' : 'EN'}
+              </button>
 
               {/* Cart Icon */}
               <motion.button
@@ -112,7 +110,7 @@ const Navbar = () => {
               </motion.button>
 
               <motion.a
-                href="#cta"
+                href="#product-buy"
                 className="group flex items-center gap-2 px-6 py-2.5 bg-aurele-gold text-aurele-noir font-medium rounded-full text-sm
                          hover:bg-aurele-gold-dark hover:shadow-glow transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
@@ -125,6 +123,16 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center gap-3">
+              {/* Language Toggle Mobile */}
+              <button
+                onClick={toggleLanguage}
+                className={`text-xs font-medium px-2 py-1 rounded-full transition-colors duration-300 ${
+                  isScrolled ? 'text-secondary hover:text-foreground' : 'text-white/70 hover:text-white'
+                }`}
+              >
+                {language === 'en' ? 'हिं' : 'EN'}
+              </button>
+
               {/* Mobile Cart Icon */}
               <button
                 onClick={() => setIsCartOpen(true)}
@@ -140,7 +148,7 @@ const Navbar = () => {
                 )}
               </button>
               <button
-                className={`p-2 transition-colors duration-300 ${
+                className={`p-2 transition-colors duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center ${
                   isScrolled ? 'text-foreground' : 'text-white'
                 }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -152,48 +160,65 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Bottom-Sheet Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-aurele-cream pt-24 px-6 md:hidden"
-          >
-            <div className="flex flex-col space-y-1">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  className="py-4 text-2xl font-display text-foreground border-b border-faint/30 hover:text-aurele-gold transition-colors"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              <div className="pt-8">
-                <a
-                  href="#cta"
-                  className="btn-primary w-full justify-center"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t.nav.discoverCollection}
-                  <ArrowRight className="w-5 h-5" />
-                </a>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-black/50 md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            {/* Bottom sheet */}
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed bottom-0 left-0 right-0 z-40 bg-aurele-cream rounded-t-3xl md:hidden shadow-elevated"
+            >
+              {/* Handle */}
+              <div className="flex justify-center pt-3 pb-2">
+                <div className="w-10 h-1 rounded-full bg-faint/50" />
               </div>
-            </div>
 
-            {/* Mobile Footer */}
-            <div className="absolute bottom-8 left-6 right-6">
-              <p className="text-sm text-muted text-center">
-                {t.nav.tagline}
-              </p>
-            </div>
-          </motion.div>
+              <div className="px-6 pb-8 pt-2">
+                <div className="flex flex-col space-y-1">
+                  {navLinks.map((link, index) => (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      className="py-4 text-xl font-display text-foreground border-b border-faint/30 hover:text-aurele-gold transition-colors min-h-[48px] flex items-center"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </motion.a>
+                  ))}
+                </div>
+
+                <div className="pt-6">
+                  <a
+                    href="#product-buy"
+                    className="btn-primary w-full justify-center min-h-[48px]"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t.nav.discoverCollection}
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                </div>
+
+                <p className="text-sm text-muted text-center mt-4">
+                  {t.nav.tagline}
+                </p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

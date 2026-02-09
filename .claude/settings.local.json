@@ -17,7 +17,9 @@
       "Bash(curl:*)",
       "WebSearch",
       "WebFetch(domain:unsplash.com)",
-      "WebFetch(domain:www.pexels.com)"
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(find:*)",
+      "Bash(del srccomponentsHero.jsx srccomponentsFeatures.jsx srccomponentsPrivacyTrust.jsx srccomponentsAurelonApp.jsx srccomponentsUseCases.jsx srccomponentsWhyLumiq.jsx srccomponentsHowItWorks.jsx srccomponentsProblemSolution.jsx srccomponentsTrust.jsx srccomponentsLifestyleGallery.jsx srccomponentsPricing.jsx srccomponentsCTA.jsx)"
     ]
   }
 }

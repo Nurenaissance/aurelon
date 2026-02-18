@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Headphones, Users, Camera } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const SolutionBlock = ({ data, icon: Icon, reverse, isDark }) => {
+const SolutionBlock = ({ data, icon: Icon, reverse, isDark, image }) => {
   const bgClass = isDark ? 'bg-aurele-noir' : 'bg-aurele-cream';
   const textClass = isDark ? 'text-white' : 'text-foreground';
   const subTextClass = isDark ? 'text-white/70' : 'text-secondary';
@@ -12,8 +12,6 @@ const SolutionBlock = ({ data, icon: Icon, reverse, isDark }) => {
   const feelingPill = isDark
     ? 'bg-aurele-gold/15 border-aurele-gold/30 text-aurele-gold'
     : 'bg-aurele-gold/10 border-aurele-gold/20 text-aurele-gold';
-  const placeholderClass = isDark ? 'image-placeholder-dark' : 'image-placeholder';
-
   const ease = [0.16, 1, 0.3, 1];
 
   return (
@@ -28,11 +26,14 @@ const SolutionBlock = ({ data, icon: Icon, reverse, isDark }) => {
             transition={{ duration: 0.7, ease }}
             className={reverse ? 'lg:order-2' : ''}
           >
-            <div className={`${placeholderClass} aspect-[4/3] w-full rounded-2xl flex flex-col items-center justify-center gap-3`}>
-              <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${isDark ? 'bg-aurele-gold/15' : 'bg-aurele-gold/10'} flex items-center justify-center`}>
-                <Icon className="w-7 h-7 md:w-8 md:h-8 text-aurele-gold" />
-              </div>
-              <span className={`text-sm font-medium ${isDark ? 'text-white/40' : 'text-muted'}`}>Coming soon</span>
+            <div className="aspect-[4/3] w-full rounded-2xl overflow-hidden relative">
+              <img
+                src={image}
+                alt={data.headline}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+              <div className={`absolute inset-0 ${isDark ? 'bg-aurele-noir/20' : 'bg-aurele-cream/10'}`} />
             </div>
           </motion.div>
 
@@ -90,9 +91,9 @@ const Solutions = () => {
   const { translations: t } = useLanguage();
 
   const blocks = [
-    { data: t.solutions.soundtrack, icon: Headphones, reverse: false, isDark: false },
-    { data: t.solutions.concert, icon: Users, reverse: true, isDark: true },
-    { data: t.solutions.witness, icon: Camera, reverse: false, isDark: false },
+    { data: t.solutions.soundtrack, icon: Headphones, reverse: false, isDark: false, image: '/images/lifestyle/smart-glasses-1.jpg' },
+    { data: t.solutions.concert, icon: Users, reverse: true, isDark: true, image: '/images/lifestyle/smart-glasses-3.jpg' },
+    { data: t.solutions.witness, icon: Camera, reverse: false, isDark: false, image: '/images/lifestyle/smart-glasses-5.jpg' },
   ];
 
   return (
@@ -104,6 +105,7 @@ const Solutions = () => {
           icon={block.icon}
           reverse={block.reverse}
           isDark={block.isDark}
+          image={block.image}
         />
       ))}
     </div>

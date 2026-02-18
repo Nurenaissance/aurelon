@@ -1,10 +1,25 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
+const getStoredCart = () => {
+  try {
+    const stored = localStorage.getItem('aurelon-cart');
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(getStoredCart);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  // Persist cart to localStorage
+  useEffect(() => {
+    localStorage.setItem('aurelon-cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (product, quantity = 1) => {
     setCartItems((prev) => {
@@ -39,6 +54,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem('aurelon-cart');
   };
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -55,6 +71,8 @@ export const CartProvider = ({ children }) => {
         cartTotal,
         isCartOpen,
         setIsCartOpen,
+        isCheckoutOpen,
+        setIsCheckoutOpen,
         addToCart,
         removeFromCart,
         updateQuantity,

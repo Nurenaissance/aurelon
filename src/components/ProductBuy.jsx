@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
+import { useToast } from './Toast';
 import {
   ChevronLeft,
   ChevronRight,
@@ -22,7 +23,8 @@ const ease = [0.16, 1, 0.3, 1];
 
 const ProductBuy = () => {
   const { translations: t } = useLanguage();
-  const { addToCart } = useCart();
+  const { addToCart, setIsCheckoutOpen } = useCart();
+  const { addToast } = useToast();
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -52,7 +54,19 @@ const ProductBuy = () => {
       image: productImages[0].src,
     }, quantity);
     setAddedToCart(true);
+    addToast(`${colors[selectedColor].name} Aurelon added to cart`, 'cart');
     setTimeout(() => setAddedToCart(false), 2000);
+  };
+
+  const handleBuyNow = () => {
+    addToCart({
+      id: 'aurelon',
+      name: 'Aurelon',
+      price: 7999,
+      color: colors[selectedColor].name,
+      image: productImages[0].src,
+    }, quantity);
+    setIsCheckoutOpen(true);
   };
 
   const goToImage = (dir) => {
@@ -149,14 +163,29 @@ const ProductBuy = () => {
 
                 {/* Wishlist */}
                 <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
+                  onClick={() => {
+                    setIsWishlisted(!isWishlisted);
+                    addToast(isWishlisted ? 'Removed from wishlist' : 'Added to wishlist', 'info');
+                  }}
+                  aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                   className="absolute top-3 md:top-4 right-3 md:right-4 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/90 shadow-card flex items-center justify-center hover:bg-white transition-colors"
                 >
                   <Heart className={`w-4 h-4 md:w-5 md:h-5 ${isWishlisted ? 'fill-error text-error' : 'text-muted'}`} />
                 </button>
 
-                {/* Video Play Button — hidden on small screens */}
-                <button className="absolute bottom-3 md:bottom-4 right-3 md:right-4 hidden sm:flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/90 shadow-card text-sm font-medium hover:bg-white transition-colors">
+                {/* Video Play Button — cycles through product images */}
+                <button
+                  onClick={() => {
+                    let i = 0;
+                    const interval = setInterval(() => {
+                      i++;
+                      if (i >= productImages.length) { clearInterval(interval); return; }
+                      setSwipeDir(1);
+                      setSelectedImage(i);
+                    }, 600);
+                  }}
+                  className="absolute bottom-3 md:bottom-4 right-3 md:right-4 hidden sm:flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/90 shadow-card text-sm font-medium hover:bg-white transition-colors"
+                >
                   <Play className="w-4 h-4 fill-foreground" />
                   <span>{t.productBuy.watchVideo}</span>
                 </button>
@@ -188,7 +217,8 @@ const ProductBuy = () => {
                       <img
                         src={img.src}
                         alt={img.alt}
-                        className="w-full h-full object-contain"
+                        loading="lazy"
+                      className="w-full h-full object-contain"
                       />
                     </div>
                   </button>
@@ -321,6 +351,7 @@ const ProductBuy = () => {
                 <motion.button
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.97 }}
+                  onClick={handleBuyNow}
                   className="w-full btn-dark justify-center py-3.5 md:py-4 min-h-[48px]"
                 >
                   {t.productBuy.buyNow}

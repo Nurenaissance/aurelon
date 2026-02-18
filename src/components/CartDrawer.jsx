@@ -9,9 +9,15 @@ const CartDrawer = () => {
     cartTotal,
     isCartOpen,
     setIsCartOpen,
+    setIsCheckoutOpen,
     updateQuantity,
     removeFromCart,
   } = useCart();
+
+  const handleCheckout = () => {
+    setIsCartOpen(false);
+    setIsCheckoutOpen(true);
+  };
 
   return (
     <AnimatePresence>
@@ -153,7 +159,10 @@ const CartDrawer = () => {
                 </p>
 
                 {/* Checkout Button */}
-                <button className="w-full py-4 bg-aurele-gold text-aurele-noir font-semibold rounded-full hover:bg-aurele-gold-dark hover:shadow-glow transition-all">
+                <button
+                  onClick={handleCheckout}
+                  className="w-full py-4 bg-aurele-gold text-aurele-noir font-semibold rounded-full hover:bg-aurele-gold-dark hover:shadow-glow transition-all"
+                >
                   Proceed to Checkout
                 </button>
 

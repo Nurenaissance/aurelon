@@ -1,0 +1,19 @@
+{
+  "name": "Aurelon Smart Glasses",
+  "short_name": "Aurelon",
+  "description": "Music, memories, and moments — from glasses you'd actually wear.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F5",
+  "theme_color": "#1A1814",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/aurelon-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["shopping"],
+  "lang": "en-IN"
+}

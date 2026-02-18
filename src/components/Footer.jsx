@@ -1,29 +1,58 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ArrowUp, Check } from 'lucide-react';
+import { Mail, ArrowUp, Check, Loader2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from './Toast';
+
+const WEBHOOK_URL = 'https://nurenaiautomatic-b7hmdnb4fzbpbtbh.canadacentral-01.azurewebsites.net/webhook/aurelon-order';
 
 const Footer = () => {
   const { translations: t } = useLanguage();
+  const { addToast } = useToast();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) return;
-    setSubmitted(true);
-    setEmail('');
-    setTimeout(() => setSubmitted(false), 3000);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      addToast('Please enter a valid email address', 'error');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'newsletter_subscription',
+          email,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      setSubmitted(true);
+      setEmail('');
+      addToast('Subscribed successfully!', 'success');
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch {
+      addToast('Subscription failed. Please try again.', 'error');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const socialLinks = [
-    { name: 'Instagram', href: '#' },
-    { name: 'LinkedIn', href: '#' },
-    { name: 'Twitter', href: '#' },
+    { name: 'Instagram', href: 'https://instagram.com/aurelon' },
+    { name: 'LinkedIn', href: 'https://linkedin.com/company/aurelon' },
+    { name: 'Twitter', href: 'https://twitter.com/aurelon' },
   ];
 
   return (
@@ -72,8 +101,10 @@ const Footer = () => {
                   </div>
                   <button
                     type="submit"
-                    className="px-6 py-3.5 rounded-full bg-aurele-gold text-aurele-noir font-semibold text-sm hover:bg-aurele-gold-dark transition-all duration-300 min-h-[48px]"
+                    disabled={submitting}
+                    className="px-6 py-3.5 rounded-full bg-aurele-gold text-aurele-noir font-semibold text-sm hover:bg-aurele-gold-dark transition-all duration-300 min-h-[48px] disabled:opacity-60 flex items-center gap-2"
                   >
+                    {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                     {t.footer.subscribe}
                   </button>
                 </div>
@@ -95,17 +126,20 @@ const Footer = () => {
 
             {/* Links */}
             <div className="flex items-center gap-6 text-sm text-white/50">
-              {t.footer.links.map((link, i) => (
-                <a key={i} href="#" className="hover:text-aurele-gold transition-colors duration-300">
-                  {link}
-                </a>
-              ))}
+              {t.footer.links.map((link, i) => {
+                const hrefs = ['#brand-statement', '#', '#solutions', '#product-buy'];
+                return (
+                  <a key={i} href={hrefs[i] || '#'} className="hover:text-aurele-gold transition-colors duration-300">
+                    {link}
+                  </a>
+                );
+              })}
             </div>
 
             {/* Social */}
             <div className="flex items-center gap-6 text-sm text-white/40">
               {socialLinks.map((social, i) => (
-                <a key={i} href={social.href} className="hover:text-aurele-gold transition-colors duration-300">
+                <a key={i} href={social.href} target="_blank" rel="noopener noreferrer" className="hover:text-aurele-gold transition-colors duration-300">
                   {social.name}
                 </a>
               ))}
